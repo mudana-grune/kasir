@@ -25235,7 +25235,8 @@ var render = function() {
                                     "v-btn",
                                     {
                                       attrs: {
-                                        color: "primary",
+                                        dark: "",
+                                        color: "purple",
                                         type: "submit"
                                       }
                                     },
