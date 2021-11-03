@@ -33,7 +33,7 @@
                         </v-card-text>
                         <v-card-actions>
                             <v-spacer></v-spacer>
-                            <v-btn color="primary" type="submit">Login</v-btn>
+                            <v-btn dark color="purple" type="submit">Login</v-btn>
                         </v-card-actions>
                     </v-card>
                     </v-form>
