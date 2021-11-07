@@ -37,6 +37,12 @@ Route::group(['middleware' => 'auth:api'], function(){
         Route::get('users/check', 'UserController@checkUsername');
         Route::delete('users/{id}', 'UserController@destroy');
     });
+    Route::group(['middleware'=>'isManager'], function(){
+        Route::get('cabang', 'CabangController@index');
+        Route::post('cabang', 'CabangController@store');
+        Route::post('cabang/{id}', 'CabangController@update');
+        Route::delete('cabang/{id}', 'CabangController@destroy');
+    });
 
     Route::get('users/{id}', 'UserController@show')->middleware('isAdminOrSelf');
 });

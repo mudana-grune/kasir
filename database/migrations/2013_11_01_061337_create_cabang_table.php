@@ -17,7 +17,7 @@ class CreateCabangTable extends Migration
             $table->bigIncrements('id')->unsigned();
             $table->string('nama');
             $table->string('alamat');
-            $table->string('telepon');
+            $table->string('telepon')->nullable();
             $table->string('email')->nullable();
             $table->string('ig')->nullable();
             $table->timestamps();
