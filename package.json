@@ -27,7 +27,7 @@
         "@mdi/font": "^6.4.95",
         "@websanova/vue-auth": "^4.1.6",
         "es6-promise": "^4.2.8",
-        "material-design-icons-iconfont": "^6.1.0",
+        "material-design-icons-iconfont": "^6.1.1",
         "vue-axios": "^3.4.0",
         "vue-meta": "^2.4.0",
         "vue-router": "^3.5.3",
