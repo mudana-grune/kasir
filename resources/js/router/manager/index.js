@@ -1,6 +1,7 @@
 import user from './modules/user';
 import AppBase from '../../components/AppBase';
 import dashboard from './modules/dashboard';
+import cabang from './modules/cabang';
 
 const MANAGER = 3;
 const managerRoutes = {
@@ -14,7 +15,8 @@ const managerRoutes = {
     },
     children : [
         ...user,
-        ...dashboard
+        ...dashboard,
+        ...cabang
     ]
 }
 

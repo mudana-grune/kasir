@@ -16,9 +16,9 @@
 
     <v-divider></v-divider>
 
-    <v-list dense nav v-if="isAdmin">
+    <v-list dense nav>
       <v-list-item-group>
-        <template v-for="menu in adminMenus">
+        <template v-for="menu in menus">
               <v-list-item  v-if="!menu.hasChildren" :key="menu.id" :to="menu.route">
                 <v-list-item-icon>
                   <v-icon>{{ menu.icon }}</v-icon>
@@ -58,6 +58,7 @@
 <script>
 const ADMIN_ROLE = 2;
 const USER_ROLE = 1;
+const MANAGER_ROLE = 3;
 const adminMenus = [
     {
         id: 'dashboard',
@@ -101,7 +102,40 @@ const adminMenus = [
         ]
     }
 ];
+const managerMenus = [
+    {
+        id: 'dashboard',
+        label: 'Dashborad',
+        route: {name: 'manager.dashboard'},
+        icon: 'mdi-home-city',
+        hasChildren: false,
+    },
+    {
+        id: 'cabang',
+        label: 'Cabang',
+        icon: 'mdi-home-group',
+        hasChildren: true,
+        children: [
+            {
+                id: 'daftarCabang',
+                label: 'Daftar Cabang',
+                hasChildren: false,
+                route: { name: 'manager.cabang.list'}
+            }
+        ]
+    }
 
+];
+const kasirMenus = [
+    {
+
+        id: 'dashboard',
+        label: 'Dashborad',
+        route: {name: 'kasir.dashboard'},
+        icon: 'mdi-home-city',
+        hasChildren: false,
+    }
+];
 const navLeftMenus = [
   {
     id: 'dashboard',
@@ -261,7 +295,9 @@ export default {
   data() {
     return {
       navLeftMenus,
-      adminMenus
+      adminMenus,
+      managerMenus,
+      kasirMenus
     };
   },
   computed: {
@@ -275,6 +311,15 @@ export default {
     },
     isAdmin() {
         return this.$auth.check(ADMIN_ROLE);
+    },
+    isManager(){
+        return this.$auth.check(MANAGER_ROLE);
+    },
+    isUser(){
+        return this.$auth.check(USER_ROLE);
+    },
+    menus(){
+        return this.isAdmin ? adminMenus : (this.isManager ? managerMenus : kasirMenus);
     },
   },
   created() {},

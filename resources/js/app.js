@@ -10,6 +10,7 @@ import auth from './auth'
 import router from './router/index'
 import vuetify from './vuetify';
 import meta from 'vue-meta';
+import store from './store';
 // Set Vue globally
 window.Vue = Vue
 
@@ -28,6 +29,7 @@ Vue.component('index', Index)
 
 const app = new Vue({
   vuetify,
+  store,
   el: '#app',
   router
 });
