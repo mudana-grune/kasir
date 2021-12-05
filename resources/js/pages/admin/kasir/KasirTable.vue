@@ -13,7 +13,7 @@
         >
         <template v-slot:top>
             <v-toolbar flat>
-            <v-toolbar-title>Daftar Kasir</v-toolbar-title>
+            <v-toolbar-title>{{ isManager ?  'Daftar User': 'Daftar Kasir' }}</v-toolbar-title>
             <v-divider class="mx-4" inset vertical></v-divider>
             <v-spacer></v-spacer>
             <v-dialog v-model="dialog" max-width="500px">
@@ -141,6 +141,7 @@
 <script>
 const ADMIN_ROLE = 2;
 const KASIR_ROLE = 1;
+const MANAGER_ROLE = 3;
 import io from 'lodash';
 import { getAll, store, update, destroy } from "../../../services/crud";
 export default {
@@ -187,6 +188,9 @@ export default {
   },
 
   computed: {
+    isManager(){
+        return this.$auth.user().role === MANAGER_ROLE;
+    },
     cabang() {
       return this.$auth.user().cabang ? this.$auth.user().cabang.id : null;
     },
@@ -194,7 +198,8 @@ export default {
       return this.editedIndex === -1 ? "Tambah Kasir" : "Edit Kasir";
     },
     headers() {
-      return [
+      const manage =  { text: "Manage", value: "actions", sortable: false , align: 'end'};
+      const headers = [
         {
           text: "#",
           align: "start",
@@ -207,13 +212,27 @@ export default {
           value: "name",
         },
         { text: "Username", value: "username" },
-        { text: "Manage", value: "actions", sortable: false , align: 'end'},
+
       ];
+      if(this.isManager){
+          headers.push(
+              { text: "Role", value: "role", sortable: true, align: "start" },
+              { text: "Cabang", value: "cabang", sortable: true, align: "start" },
+              manage
+          )
+      }else{
+          headers.push(manage)
+      }
+
+      return headers;
+
     },
     displayedUsers() {
       return this.users.map((user, index) => ({
         ...user,
         nomor: index+1,
+        role: user.role ? (user.role === ADMIN_ROLE ? "Admin": "Kasir" ) : "",
+        cabang: user.cabang ? user.cabang.nama : ""
       }));
     },
   },

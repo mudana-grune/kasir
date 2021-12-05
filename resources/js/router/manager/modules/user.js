@@ -1,5 +1,5 @@
-import UserTable from '../../../pages/manager/user/UserTable';
-import UserForm from '../../../pages/manager/user/UserForm';
+import UserTable from '../../../pages/admin/kasir/KasirTable';
+import UserForm from '../../../pages/admin/kasir/KasirForm';
 const user = [
     {
         path: '/manager/user',

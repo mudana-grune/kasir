@@ -123,6 +123,20 @@ const managerMenus = [
                 route: { name: 'manager.cabang.list'}
             }
         ]
+    },
+    {
+        id: 'user',
+        label: 'User',
+        icon: 'mdi-account-multiple',
+        hasChildren: true,
+        children: [
+            {
+                id: 'daftarUser',
+                label: 'Daftar User',
+                hasChildren: false,
+                route: { name: 'manager.user'}
+            },
+        ]
     }
 
 ];

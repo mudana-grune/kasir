@@ -13,10 +13,13 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
+        $auth = Auth::user()->role;
         $cabang = Auth::user()->cabang_id;
         $params = $request->all();
         $perPage = empty($params['itemsPerPage']) ? 5 : (int) $params['itemsPerPage'];
-        $users = User::where('cabang_id', $cabang)->where('role', User::ROLE_KASIR);
+        $users = $auth === User::ROLE_MANAGER ?
+        User::with('cabang')->where('role' , '<', User::ROLE_MANAGER) :
+        User::where('cabang_id', $cabang)->where('role', User::ROLE_KASIR);
         $users = $this->sort($users, $params['sortBy'], $params['sortDesc'], false);
         $users = $this->finalize($users, $perPage);
         $data = new stdClass();
